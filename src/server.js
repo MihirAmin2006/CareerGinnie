@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const apiRoutes = require('./routes/api');
+const dashboardRoutes = require('./routes/dashboard');
 require('dotenv').config();
 
 const app = express();
@@ -13,9 +15,17 @@ app.use(express.static('public'));
 // API Routes
 app.use('/api', apiRoutes);
 
-// Basic route for testing
+// Dashboard routes
+app.use('/', dashboardRoutes);
+
+// Root route should serve the index.html file
 app.get('/', (req, res) => {
-    res.send('Career Advisor API is running');
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+// Catch-all route to handle client-side routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;

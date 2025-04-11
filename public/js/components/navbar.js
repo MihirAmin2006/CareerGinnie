@@ -156,25 +156,39 @@ firebase.auth().onAuthStateChanged((user) => {
 
 // Update auth functions to use window.auth
 async function handleAuth(event, mode) {
-  event.preventDefault();
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-  try {
-    if (mode === "signin") {
-      await window.auth.signInWithEmailAndPassword(email, password);
-    } else {
-      const confirmPassword = document.getElementById("confirmPassword").value;
-      if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
-      await window.auth.createUserWithEmailAndPassword(email, password);
+    try {
+        if (mode === "signin") {
+            // Use the global firebase auth object
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+            console.log("Login successful, redirecting to dashboard");
+            
+            // Close the modal first
+            closeAuthModal();
+            
+            // Redirect to dashboard after successful sign in
+            window.location.href = '/dashboard';
+        } else {
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return;
+            }
+            await firebase.auth().createUserWithEmailAndPassword(email, password);
+            
+            // Close the modal first
+            closeAuthModal();
+            
+            // Redirect to dashboard after successful registration
+            window.location.href = '/dashboard';
+        }
+    } catch (error) {
+        console.error("Auth error:", error);
+        alert(error.message);
     }
-    closeAuthModal();
-  } catch (error) {
-    alert(error.message);
-  }
 }
 
 function signOut() {
