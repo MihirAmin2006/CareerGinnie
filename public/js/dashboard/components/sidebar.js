@@ -3,7 +3,7 @@ function renderSidebar() {
   return `
     <aside class="w-64 bg-indigo-800 text-white hidden md:block">
         <div class="p-6">
-            <h1 class="text-2xl font-bold">CarrierGeinie</h1>
+            <h1 class="text-2xl font-bold">CareerGinnie</h1>
         </div>
         <nav class="mt-6">
             <a href="/dashboard" class="flex items-center py-3 px-6 bg-indigo-900 text-white">
