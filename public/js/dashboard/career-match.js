@@ -61,51 +61,7 @@ async function initCareerMatch() {
             </div>
         </div>
         
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Career Exploration</h2>
-            <p class="text-gray-600 mb-4">Explore other career paths that might interest you.</p>
-            
-            <div class="mb-4">
-                <label for="career-search" class="block text-sm font-medium text-gray-700 mb-1">Search Careers</label>
-                <input type="text" id="career-search" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Search by title, skill, or industry">
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div>
-                    <label for="industry-filter" class="block text-sm font-medium text-gray-700 mb-1">Industry</label>
-                    <select id="industry-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">All Industries</option>
-                        <option value="tech">Technology</option>
-                        <option value="finance">Finance</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="education">Education</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="experience-filter" class="block text-sm font-medium text-gray-700 mb-1">Experience Level</label>
-                    <select id="experience-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">All Levels</option>
-                        <option value="entry">Entry Level</option>
-                        <option value="mid">Mid Level</option>
-                        <option value="senior">Senior Level</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="salary-filter" class="block text-sm font-medium text-gray-700 mb-1">Salary Range</label>
-                    <select id="salary-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                        <option value="">All Ranges</option>
-                        <option value="0-50000">$0 - $50,000</option>
-                        <option value="50000-100000">$50,000 - $100,000</option>
-                        <option value="100000-150000">$100,000 - $150,000</option>
-                        <option value="150000+">$150,000+</option>
-                    </select>
-                </div>
-            </div>
-            
-            <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
-                Search
-            </button>
-        </div>
+        
     `;
 
     contentContainer.innerHTML = careerMatchContent;
