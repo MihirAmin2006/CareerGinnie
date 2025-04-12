@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const featuresContainer = document.getElementById('features-container');
-  
+document.addEventListener("DOMContentLoaded", function () {
+  const featuresContainer = document.getElementById("features-container");
+
   featuresContainer.innerHTML = `
     <section id="features" class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,9 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Feature 1 -->
           <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="ri-bar-chart-grouped-line ri-lg text-primary"></i>
-            </div>
+<dotlottie-wc
+  src="https://lottie.host/82d689e2-1721-4c25-a223-3dc33e66f780/8WbECwuCXG.lottie"
+  style="width: 80px; height: 80px;"
+  autoplay
+  loop
+></dotlottie-wc>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">
               Skills Assessment
             </h3>
@@ -31,9 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
           <!-- Feature 2 -->
           <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="ri-briefcase-line ri-lg text-primary"></i>
-            </div>
+<dotlottie-wc
+  src="https://lottie.host/37ceac20-807a-4baf-8f25-3d1b827045b6/YnCnkLLybG.lottie"
+    speed="1"
+  style="width: 80px; height: 80px"
+  autoplay
+  loop
+></dotlottie-wc>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">
               Job Matching
             </h3>
@@ -45,9 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
           <!-- Feature 3 -->
           <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="ri-funds-line ri-lg text-primary"></i>
-            </div>
+            <dotlottie-player
+  src="https://lottie.host/96f5ad05-c912-46f9-b3ca-c67c1cd7c475/CALRtfdB5R.lottie"
+  background="transparent"
+  speed="1"
+  style="width: 80px; height: 80px"
+  loop
+  autoplay
+></dotlottie-player>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">
               Salary Insights
             </h3>
@@ -59,9 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
           <!-- Feature 4 -->
           <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="ri-book-open-line ri-lg text-primary"></i>
-            </div>
+            <dotlottie-player
+  src="https://lottie.host/0137e03a-fe95-45b9-afb8-4239a9ee6a55/e0Z7XvNMX9.lottie"
+  background="transparent"
+  speed="1"
+  style="width: 80px; height: 80px"
+  loop
+  autoplay
+></dotlottie-player>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">
               Learning Resources
             </h3>

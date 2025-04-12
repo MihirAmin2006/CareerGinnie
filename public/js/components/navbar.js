@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             <a href="/" class="text-2xl font-['Pacifico'] text-primary">CareerGinnie</a>
                             <div class="hidden md:ml-10 md:flex md:space-x-8">
                                 <a href="#features" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">Features</a>
-                                <a href="#pricing" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">Pricing</a>
-                                <a href="#resources" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">Resources</a>
-                                <a href="#about" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">About</a>
+                                <a href="#dashboard-preview-container" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">Pricing</a>
+                                
                             </div>
                         </div>
                         <div class="flex items-center">
