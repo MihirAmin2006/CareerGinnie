@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Assessment Quiz</title>
+    <link href="css/tailwind.css" rel="stylesheet">
+    <!-- Add custom styles -->
+    <style>
+        .quiz-option:hover {
+            border-color: #4F46E5;
+            background-color: #EEF2FF;
+        }
+        .quiz-option input[type="radio"]:checked + label {
+            color: #4F46E5;
+        }
+        .quiz-option input[type="radio"]:checked ~ .quiz-option {
+            border-color: #4F46E5;
+            background-color: #EEF2FF;
+        }
+        .btn-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="/dashboard.html" class="text-2xl font-bold text-purple-600 hover:text-purple-700">
+                    CareerGenie
+                </a>
+                <h1 class="text-xl font-semibold text-gray-700">Skill Assessment</h1>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <!-- Quiz content will be rendered here -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed bottom-0 w-full bg-white shadow-md">
+        <div class="max-w-7xl mx-auto py-3 px-4">
+            <p class="text-center text-gray-600">
+                © 2024 CareerGenie. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Make sure Tailwind is properly loaded -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add this before your quiz.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/openai@4.24.1/dist/browser.min.js"></script>
+    <script type="module" src="js/dashboard/quiz.js"></script>
+</body>
+</html>
