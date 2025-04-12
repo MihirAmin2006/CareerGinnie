@@ -58,14 +58,6 @@ function initDashboard() {
             ${renderJobMarket()}
             
             <div id="salary-trends-container" class="mt-6"></div>
-            
-            <div class="notification-container">
-                ${renderNotifications()}
-            </div>
-            
-            <div class="weekly-goal-container">
-                ${renderGoalTracker()}
-            </div>
         `;
         
         contentContainer.innerHTML = dashboardContent;
@@ -199,7 +191,7 @@ function fetchUserData() {
     const userData = {
         name: "John Smith",
         initials: "JS",
-        skillScore: 78,
+        skillScore: '--',
         careerMatches: 4,
         profileCompletion: 85,
         skills: [
@@ -381,14 +373,14 @@ function renderUserOverview() {
     return `
         <div class="bg-white rounded-lg shadow p-6 mb-6">
             <div class="flex items-center">
-                <div class="bg-indigo-100 text-indigo-800 rounded-full h-16 w-16 flex items-center justify-center text-xl font-bold mr-4" id="user-initials">JS</div>
+                <div class="bg-indigo-100 text-indigo-800 rounded-full h-16 w-16 flex items-center justify-center text-xl font-bold mr-4" id="user-initials">--</div>
                 <div>
-                    <h2 class="text-xl font-bold text-gray-800" id="user-name">John Smith</h2>
-                    <p class="text-gray-600">Software Developer</p>
+                    <h2 class="text-xl font-bold text-gray-800" id="user-name">Welcome</h2>
+                    <p class="text-gray-600">Complete your profile</p>
                 </div>
                 <div class="ml-auto text-right">
                     <div class="text-sm text-gray-600">Skill Score</div>
-                    <div class="text-2xl font-bold text-indigo-600" id="skill-score">78</div>
+                    <div class="text-2xl font-bold text-indigo-600" id="skill-score">--</div>
                 </div>
             </div>
         </div>
@@ -400,11 +392,10 @@ function renderSkillsAssessment() {
         <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Skills Assessment</h2>
             <div class="space-y-4" id="skills-list">
-                <!-- Skills will be populated by updateUserInterface() -->
-                <div class="text-center text-gray-500 py-4">Loading skills...</div>
+                <div class="text-center text-gray-500 py-4">No skills assessed yet</div>
             </div>
             <button class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
-                Take New Assessment
+                Take Your First Assessment
             </button>
         </div>
     `;
@@ -415,30 +406,10 @@ function renderCareerPaths() {
         <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Career Paths</h2>
             <div class="space-y-3" id="career-paths-list">
-                <div class="border rounded-lg p-3">
-                    <h3 class="font-medium">Full Stack Developer</h3>
-                    <div class="flex justify-between text-sm mt-2">
-                        <span>Match: 92%</span>
-                        <span class="text-green-600">+15% demand</span>
-                    </div>
-                </div>
-                <div class="border rounded-lg p-3">
-                    <h3 class="font-medium">DevOps Engineer</h3>
-                    <div class="flex justify-between text-sm mt-2">
-                        <span>Match: 85%</span>
-                        <span class="text-green-600">+23% demand</span>
-                    </div>
-                </div>
-                <div class="border rounded-lg p-3">
-                    <h3 class="font-medium">Data Scientist</h3>
-                    <div class="flex justify-between text-sm mt-2">
-                        <span>Match: 78%</span>
-                        <span class="text-green-600">+18% demand</span>
-                    </div>
-                </div>
+                <div class="text-center text-gray-500 py-4">Complete an assessment to view matching career paths</div>
             </div>
-            <button class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
-                Explore More Paths
+            <button class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded" disabled>
+                Explore Career Paths
             </button>
         </div>
     `;
@@ -451,18 +422,18 @@ function renderJobMarket() {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="border rounded-lg p-4">
                     <h3 class="font-medium text-gray-800">Average Salary</h3>
-                    <p class="text-2xl font-bold text-indigo-600 mt-2">$95,000</p>
-                    <p class="text-sm text-gray-600 mt-1">For your skill profile</p>
+                    <p class="text-2xl font-bold text-indigo-600 mt-2">--</p>
+                    <p class="text-sm text-gray-600 mt-1">Complete profile to view</p>
                 </div>
                 <div class="border rounded-lg p-4">
                     <h3 class="font-medium text-gray-800">Job Openings</h3>
-                    <p class="text-2xl font-bold text-indigo-600 mt-2">1,240</p>
-                    <p class="text-sm text-gray-600 mt-1">In your area</p>
+                    <p class="text-2xl font-bold text-indigo-600 mt-2">--</p>
+                    <p class="text-sm text-gray-600 mt-1">Complete profile to view</p>
                 </div>
                 <div class="border rounded-lg p-4">
                     <h3 class="font-medium text-gray-800">Top Skill Gap</h3>
-                    <p class="text-2xl font-bold text-indigo-600 mt-2">Cloud Services</p>
-                    <p class="text-sm text-gray-600 mt-1">Based on job requirements</p>
+                    <p class="text-2xl font-bold text-indigo-600 mt-2">--</p>
+                    <p class="text-sm text-gray-600 mt-1">Complete profile to view</p>
                 </div>
             </div>
         </div>
@@ -473,7 +444,21 @@ function renderSalaryTrends() {
     return `
         <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Salary Trends</h2>
-            <div id="salary-trends-chart" style="height: 300px;"></div>
+            <div class="text-center text-gray-500 py-8">Complete your profile to view salary trends</div>
+            <div id="salary-trends-chart" style="height: 300px; display: none;"></div>
+        </div>
+    `;
+}
+
+function renderNotifications() {
+    return `
+        <div class="bg-white rounded-lg shadow p-6 mt-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Notifications</h2>
+            </div>
+            <div class="space-y-3" id="notifications-list">
+                <div class="text-center text-gray-500 py-4">No notifications yet</div>
+            </div>
         </div>
     `;
 }
@@ -483,11 +468,10 @@ function renderGoalTracker() {
         <div class="bg-white rounded-lg shadow p-6 mt-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold text-gray-800">Weekly Goals</h2>
-                <button class="text-sm text-indigo-600 hover:text-indigo-800">Add Goal</button>
             </div>
             <div class="space-y-3">
-                <!-- Goals will be populated by updateGoals() -->
-                <div class="text-center text-gray-500 py-4">Loading goals...</div>
+                <div class="text-center text-gray-500 py-4">Set your first goal to get started</div>
             </div>
         </div>
-    `;}
+    `;
+}
