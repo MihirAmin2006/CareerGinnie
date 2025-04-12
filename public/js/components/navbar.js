@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="hidden md:ml-10 md:flex md:space-x-8">
                                 <a href="#features" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">Features</a>
                                 <a href="#dashboard-preview-container" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">Pricing</a>
+                                <a href="#about-container" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium">About Us</a>
                                 
                             </div>
                         </div>
