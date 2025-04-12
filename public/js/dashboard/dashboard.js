@@ -490,5 +490,4 @@ function renderGoalTracker() {
                 <div class="text-center text-gray-500 py-4">Loading goals...</div>
             </div>
         </div>
-    `;
-}
+    `;}
