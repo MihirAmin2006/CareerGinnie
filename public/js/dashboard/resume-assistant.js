@@ -1,70 +1,129 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize sidebar
-    initResumeAssistant();
-    
-    // Setup event listeners
-    setupEventListeners();
-    
-    // Handle logout
-    setupLogout();
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize sidebar
+  initResumeAssistant();
+
+  // Setup event listeners
+  setupEventListeners();
+
+  // Handle logout
+  setupLogout();
+  
+  // Setup dark mode
+  setupDarkMode();
 });
 
 function initResumeAssistant() {
-    // Get container elements
-    const sidebarContainer = document.querySelector('.flex.min-h-screen');
-    const resumeAssistantContent = document.getElementById('resume-assistant-content');
-    
-    // Insert sidebar before main content
-    sidebarContainer.innerHTML = renderSidebar() + renderMobileMenu() + sidebarContainer.innerHTML;
-    
-    // Render resume assistant content
-    resumeAssistantContent.innerHTML = renderResumeAssistant();
+  const mainContent = document.querySelector(".flex-1");
+  const sidebarContainer = document.querySelector(".flex.min-h-screen");
+
+  // Insert sidebar before main content if it doesn't exist
+  if (
+    sidebarContainer &&
+    !document.querySelector(".bg-primary.text-white")
+  ) {
+    sidebarContainer.insertAdjacentHTML("afterbegin", renderSidebar());
+    sidebarContainer.insertAdjacentHTML("afterbegin", renderMobileMenu());
+  }
+
+  // Add resume assistant content
+  if (mainContent) {
+    mainContent.innerHTML = `
+      <div class="container mx-auto px-4 py-6">
+        ${renderResumeAssistant()}
+      </div>
+    `;
+  }
 }
 
 function setupEventListeners() {
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
-        });
-    }
-    
-    // Add event listeners for buttons
-    const editResumeButton = document.querySelector('button.bg-indigo-600');
-    if (editResumeButton) {
-        editResumeButton.addEventListener('click', function() {
-            alert('Opening resume editor...');
-            // In a real app, this would open the resume editor
-        });
-    }
-    
-    // Template selection
-    const templateCards = document.querySelectorAll('.cursor-pointer');
-    templateCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const templateName = this.querySelector('p').textContent;
-            alert(`Selected template: ${templateName}`);
-            // In a real app, this would apply the template
-        });
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
     });
+  }
+  
+  // Add event listeners for resume buttons
+  const editResumeBtn = document.querySelector('button:contains("Edit Resume")');
+  if (editResumeBtn) {
+    editResumeBtn.addEventListener('click', () => {
+      // Open resume editor
+      console.log('Opening resume editor...');
+    });
+  }
 }
 
 function setupLogout() {
-    // Add logout handler
-    const logoutLinks = document.querySelectorAll('a[href="/logout"]');
-    
-    logoutLinks.forEach(link => {
-        link.addEventListener('click', async (e) => {
-            e.preventDefault();
-            try {
-                await firebase.auth().signOut();
-                window.location.href = '/';
-            } catch (error) {
-                console.error('Error signing out:', error);
-            }
-        });
+  // Look for any elements with logout or sign out text
+  document.querySelectorAll('a, button').forEach(element => {
+    const text = element.textContent.toLowerCase().trim();
+    if (text === 'logout' || text === 'sign out' || text === 'log out') {
+      element.addEventListener('click', handleLogout);
+    }
+  });
+}
+
+function handleLogout(e) {
+  if (e) e.preventDefault();
+  
+  // Use the global firebase auth object
+  if (typeof firebase !== 'undefined') {
+    firebase.auth().signOut()
+      .then(() => {
+        // Redirect to index page
+        window.location.href = '/index.html';
+      })
+      .catch(error => {
+        console.error('Error signing out:', error);
+        // Still redirect even if there's an error
+        window.location.href = '/index.html';
+      });
+  } else {
+    window.location.href = '/index.html';
+  }
+}
+
+function setupDarkMode() {
+  const darkModeToggle = document.getElementById("theme-toggle-sidebar");
+  
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Refresh sidebar to update theme toggle button
+      refreshSidebar();
     });
+  }
+}
+
+function refreshSidebar() {
+  const sidebarContainer = document.querySelector('.flex.min-h-screen');
+  if (sidebarContainer) {
+    // Remove old sidebar
+    const oldSidebar = sidebarContainer.querySelector('aside');
+    if (oldSidebar) {
+      oldSidebar.remove();
+    }
+    
+    // Remove old mobile menu
+    const oldMobileMenu = document.querySelector('.md\\:hidden');
+    if (oldMobileMenu) {
+      oldMobileMenu.remove();
+    }
+    const oldMobileMenuContent = document.getElementById('mobile-menu');
+    if (oldMobileMenuContent) {
+      oldMobileMenuContent.remove();
+    }
+    
+    // Insert updated components
+    sidebarContainer.insertAdjacentHTML('afterbegin', renderSidebar());
+    sidebarContainer.insertAdjacentHTML('afterbegin', renderMobileMenu());
+  }
 }

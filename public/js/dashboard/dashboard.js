@@ -34,8 +34,10 @@ function initDashboard() {
         }
     }
     
-    // Replace main content with components
+    // Add margin to main content to account for fixed sidebar
     if (mainContent) {
+        mainContent.classList.add('md:ml-64');
+        
         // Make sure we have a container for our content
         if (!mainContent.querySelector('.container')) {
             mainContent.innerHTML = '<div class="container mx-auto px-4 py-6"></div>';

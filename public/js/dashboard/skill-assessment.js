@@ -34,7 +34,7 @@ function initSkillAssessment() {
 function renderUserProfileForm() {
   return `
     <div class="container mx-auto px-4 py-6">
-      <h1 class="text-2xl font-bold text-gray-800 mb-6">Professional Profile</h1>
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">Professional Profile</h1>
       
       <div class="bg-white rounded-lg shadow-sm p-6 max-w-2xl mx-auto">
         <form id="user-profile-form" class="space-y-6">

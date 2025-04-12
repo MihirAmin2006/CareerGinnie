@@ -3,42 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CarrierGinnie Dashboard</title>
+    <title>CareerGinnie - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <script src="/js/tailwind-config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyDIls2kMn_hJf0i9SRrW1Y9ydm-BGER8bQ",
-        authDomain: "career-ginnie-2b65a.firebaseapp.com",
-        projectId: "career-ginnie-2b65a",
-        storageBucket: "career-ginnie-2b65a.firebasestorage.app",
-        messagingSenderId: "629749641046",
-        appId: "1:629749641046:web:bf37554714d16b1ac5b0f7",
-        measurementId: "G-K8PW72J1Z4",
-      };
-
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      }
-    </script>
-
-    <!-- Charts Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="/js/config/firebase-config.js"></script>
+    
+    <!-- ECharts for data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
   </head>
-  <body class="bg-gray-100">
+  <body class="transition-colors duration-300">
     <div class="flex min-h-screen">
       <!-- Sidebar will be inserted here by JS -->
       
       <!-- Main content container -->
-      <div class="flex-1 overflow-x-hidden overflow-y-auto">
+      <div class="flex-1 overflow-x-hidden overflow-y-auto transition-colors duration-300">
         <div class="container mx-auto px-4 py-6">
           <!-- Content will be dynamically inserted here by dashboard.js -->
         </div>
@@ -60,10 +55,12 @@
     <script src="/js/dashboard/auth-check.js"></script>
 
     <!-- Main Dashboard Script -->
-    <!-- Add these before the dashboard.js script -->
     <script src="/js/dashboard/components/career-match.js"></script>
     <script src="/js/dashboard/components/resume-assistant.js"></script>
     <script src="/js/dashboard/components/resources.js"></script>
     <script src="/js/dashboard/dashboard.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="/js/theme.js"></script>
   </body>
 </html>

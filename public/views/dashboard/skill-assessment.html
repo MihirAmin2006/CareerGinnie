@@ -3,122 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CarrierGeinie - Skill Assessment</title>
+    <title>CareerGinnie - Skill Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add this line in the head section -->
+    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <script src="/js/tailwind-config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/dashboard.css" />
 
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyDIls2kMn_hJf0i9SRrW1Y9ydm-BGER8bQ",
-        authDomain: "career-ginnie-2b65a.firebaseapp.com",
-        projectId: "career-ginnie-2b65a",
-        storageBucket: "career-ginnie-2b65a.firebasestorage.app",
-        messagingSenderId: "629749641046",
-        appId: "1:629749641046:web:bf37554714d16b1ac5b0f7",
-        measurementId: "G-K8PW72J1Z4",
-      };
-
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      }
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="/js/config/firebase-config.js"></script>
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-50 transition-colors duration-300">
     <div class="flex min-h-screen">
       <!-- Sidebar will be inserted here by JS -->
       
-      <!-- Main content container -->
-      <div class="flex-1 overflow-x-hidden overflow-y-auto">
-        <div class="container mx-auto px-4 py-6">
-          <div class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Skill Assessment</h1>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Available Assessments</h2>
-            <div class="space-y-4">
-              <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-lg font-semibold text-gray-800">JavaScript Fundamentals</h3>
-                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">20 Questions</span>
-                </div>
-                <p class="text-sm text-gray-600 mt-2">Test your knowledge of JavaScript basics including variables, functions, and control flow.</p>
-                <div class="mt-4">
-                  <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-colors">
-                    Start Assessment
-                  </button>
-                </div>
-              </div>
-              
-              <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-lg font-semibold text-gray-800">React Framework</h3>
-                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">15 Questions</span>
-                </div>
-                <p class="text-sm text-gray-600 mt-2">Evaluate your understanding of React components, state management, and hooks.</p>
-                <div class="mt-4">
-                  <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-colors">
-                    Start Assessment
-                  </button>
-                </div>
-              </div>
-              
-              <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-lg font-semibold text-gray-800">Python Data Science</h3>
-                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">25 Questions</span>
-                </div>
-                <p class="text-sm text-gray-600 mt-2">Test your skills with Python libraries like NumPy, Pandas, and data visualization tools.</p>
-                <div class="mt-4">
-                  <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-colors">
-                    Start Assessment
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Your Assessment History</h2>
-            <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                  <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assessment</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">JavaScript Fundamentals</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 15, 2023</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">85%</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900">View Details</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">React Framework</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 28, 2023</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">72%</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900">View Details</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <!-- Main content container with fixed margin for sidebar -->
+      <div class="flex-1 md:ml-64 overflow-x-hidden overflow-y-auto transition-colors duration-300">
+        <!-- Your content will be dynamically inserted here by skill-assessment.js -->
       </div>
     </div>
 
@@ -129,7 +38,10 @@
     <!-- Auth Check Script -->
     <script src="/js/dashboard/auth-check.js"></script>
 
-    <!-- Skill Assessment Script -->
+    <!-- Main Script -->
     <script src="/js/dashboard/skill-assessment.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="/js/theme.js"></script>
   </body>
 </html>

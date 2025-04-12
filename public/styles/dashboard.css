@@ -1,0 +1,21 @@
+/* Dashboard specific styles */
+.flex-1 {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .md\:ml-64 {
+    margin-left: 16rem;
+    width: calc(100% - 16rem);
+  }
+  
+  /* Remove any max-width constraints from form containers */
+  .max-w-2xl {
+    max-width: none !important;
+  }
+  
+  /* Ensure form takes full width */
+  #user-profile-form {
+    width: 100%;
+  }
+}

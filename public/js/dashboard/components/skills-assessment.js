@@ -27,3 +27,32 @@ function renderSkillsAssessment() {
     </div>
   `;
 }
+
+// Function to save assessment results to local storage
+async function saveAssessmentResult(assessmentData) {
+  try {
+    const userId = firebase.auth().currentUser.uid;
+    const timestamp = new Date().toISOString();
+    
+    const result = {
+      userId,
+      timestamp,
+      title: assessmentData.title,
+      score: assessmentData.score,
+      totalQuestions: assessmentData.totalQuestions,
+      percentage: assessmentData.percentage,
+      answers: assessmentData.answers,
+      duration: assessmentData.duration
+    };
+
+    // Store in localStorage for now (can be replaced with API call later)
+    const existingResults = JSON.parse(localStorage.getItem('assessmentResults') || '[]');
+    existingResults.push(result);
+    localStorage.setItem('assessmentResults', JSON.stringify(existingResults));
+
+    return true;
+  } catch (error) {
+    console.error('Error saving assessment result:', error);
+    return false;
+  }
+}

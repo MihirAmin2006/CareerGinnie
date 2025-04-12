@@ -4,11 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CareerGinnie - Resources</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script src="/js/tailwind-config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/dashboard.css" />
 
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -16,75 +20,27 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="/js/config/firebase-config.js"></script>
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-50 transition-colors duration-300">
     <div class="flex min-h-screen">
       <!-- Sidebar will be inserted here by JS -->
       
       <!-- Main content container -->
-      <div class="flex-1 overflow-x-hidden overflow-y-auto">
-        <div class="container mx-auto px-4 py-6">
-          <div class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Resources</h1>
-          </div>
-          
-          <!-- Resources content -->
-          <div id="resources-content"></div>
-        </div>
+      <div class="flex-1 md:ml-64 overflow-x-hidden overflow-y-auto transition-colors duration-300">
+        <!-- Content will be dynamically inserted here by resources.js -->
       </div>
     </div>
 
     <!-- Component Scripts -->
     <script src="/js/dashboard/components/sidebar.js"></script>
     <script src="/js/dashboard/components/mobile-menu.js"></script>
-    <script src="/js/dashboard/components/resources.js"></script>
-    
-    <!-- Helper functions for resources component -->
-    <script>
-      function renderResourceItem(title, subtitle, level) {
-        return `
-          <div class="flex items-center justify-between">
-            <div>
-              <h4 class="font-medium text-gray-800">${title}</h4>
-              <p class="text-xs text-gray-500">${subtitle}</p>
-            </div>
-            <span class="text-xs px-2 py-1 bg-gray-100 rounded text-gray-600">${level}</span>
-          </div>
-        `;
-      }
-      
-      function renderArticleCard(title, description, readTime) {
-        return `
-          <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-            <h4 class="font-medium text-gray-800">${title}</h4>
-            <p class="text-sm text-gray-600 mt-2">${description}</p>
-            <div class="flex items-center mt-3">
-              <svg class="h-4 w-4 text-gray-400 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span class="text-xs text-gray-500">${readTime}</span>
-            </div>
-          </div>
-        `;
-      }
-      
-      function renderWebinarCard(title, date, presenter) {
-        return `
-          <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-            <h4 class="font-medium text-gray-800">${title}</h4>
-            <p class="text-sm text-gray-600 mt-2">${date}</p>
-            <p class="text-xs text-gray-500 mt-1">${presenter}</p>
-            <button class="mt-3 px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700">
-              Register
-            </button>
-          </div>
-        `;
-      }
-    </script>
-    
+
     <!-- Auth Check Script -->
     <script src="/js/dashboard/auth-check.js"></script>
 
-    <!-- Resources Script -->
+    <!-- Main Script -->
     <script src="/js/dashboard/resources.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="/js/theme.js"></script>
   </body>
 </html>
