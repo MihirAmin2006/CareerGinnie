@@ -1,7 +1,7 @@
 function renderResumeAssistant() {
     return `
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Resume Assistant</h2>
         <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Resume Assistant</h2>
             
             <div class="mb-8">
                 <div class="flex items-center justify-between mb-4">
@@ -11,7 +11,7 @@ function renderResumeAssistant() {
                     </button>
                 </div>
                 
-                <div class="border rounded-lg p-4 bg-gray-50">
+                <div class="border rounded-lg p-4 bg-gray-50 dark-mode">
                     <div class="flex items-center mb-4">
                         <svg class="h-10 w-10 text-gray-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -71,19 +71,19 @@ function renderResumeAssistant() {
                 <h3 class="text-xl font-semibold mb-4">Resume Templates</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="border rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer">
-                        <div class="h-32 bg-gray-100 rounded mb-2 flex items-center justify-center">
+                        <div class="h-32 bg-gray-100 rounded mb-2 flex items-center justify-center dark-mode">
                             <span class="text-gray-400">Professional</span>
                         </div>
                         <p class="text-center text-sm font-medium">Professional</p>
                     </div>
                     <div class="border rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer">
-                        <div class="h-32 bg-gray-100 rounded mb-2 flex items-center justify-center">
+                        <div class="h-32 bg-gray-100 rounded mb-2 flex items-center justify-center dark-mode">
                             <span class="text-gray-400">Creative</span>
                         </div>
                         <p class="text-center text-sm font-medium">Creative</p>
                     </div>
                     <div class="border rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer">
-                        <div class="h-32 bg-gray-100 rounded mb-2 flex items-center justify-center">
+                        <div class="h-32 bg-gray-100 rounded mb-2 flex items-center justify-center dark-mode">
                             <span class="text-gray-400">Executive</span>
                         </div>
                         <p class="text-center text-sm font-medium">Executive</p>

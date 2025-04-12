@@ -1,4 +1,5 @@
 // Sidebar Component
+// Theme toggle button in sidebar
 function renderSidebar() {
   const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
   
