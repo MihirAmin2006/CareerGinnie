@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerGinnie - Resume Assistant</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="/js/config/firebase-config.js"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div class="flex min-h-screen">
+      <!-- Sidebar will be inserted here by JS -->
+      
+      <!-- Main content container -->
+      <div class="flex-1 overflow-x-hidden overflow-y-auto">
+        <div class="container mx-auto px-4 py-6">
+          <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Resume Assistant</h1>
+          </div>
+          
+          <!-- Resume Assistant content -->
+          <div id="resume-assistant-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Component Scripts -->
+    <script src="/js/dashboard/components/sidebar.js"></script>
+    <script src="/js/dashboard/components/mobile-menu.js"></script>
+    <script src="/js/dashboard/components/resume-assistant.js"></script>
+    
+    <!-- Auth Check Script -->
+    <script src="/js/dashboard/auth-check.js"></script>
+
+    <!-- Resume Assistant Script -->
+    <script src="/js/dashboard/resume-assistant.js"></script>
+  </body>
+</html>
