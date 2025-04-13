@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Handle logout
   setupLogout();
   
-  // Setup dark mode
-  setupDarkMode();
+  // Setup dark mode - commented out
+  // setupDarkMode();
 });
 
 function initResources() {
@@ -37,7 +37,7 @@ function initResources() {
 
 function renderResources() {
   return `
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white rounded-lg shadow-md p-6" >
       <h2 class="text-2xl font-bold text-gray-800 mb-6">Career Resources</h2>
       
       <div class="mb-8">
@@ -226,22 +226,38 @@ function handleLogout(e) {
   }
 }
 
+/* Commenting out the setupDarkMode function
 function setupDarkMode() {
   const darkModeToggle = document.getElementById("theme-toggle-sidebar");
-  
+
   if (darkModeToggle) {
     darkModeToggle.addEventListener("click", () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      // Refresh sidebar to update theme toggle button
+      const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+
+      // Re-render content with new theme
+      const mainContent = document.querySelector(".flex-1");
+      if (mainContent) {
+        mainContent.innerHTML = `
+          <div class="container mx-auto px-4 py-6">
+            ${renderResources()}
+          </div>
+        `;
+      }
+
+      // Refresh sidebar
       refreshSidebar();
     });
   }
+  
+  // Apply saved theme on load
+  const savedTheme = localStorage.getItem("theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
 }
+*/
 
 function refreshSidebar() {
   const sidebarContainer = document.querySelector('.flex.min-h-screen');

@@ -32,17 +32,21 @@
         background-color: var(--bg-primary);
         color: var(--text-primary);
       } */
-      [data-theme="dark"] .dark-mode h4{
-        color: var(--text-primary);
-      }
-      [data-theme="dark"] .dark-mode span{
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-      }
-
+      /* <style> */
+        /* Commenting out dark mode styles
+        [data-theme="dark"] .dark-mode h4{
+          color: var(--text-primary);
+        }
+        [data-theme="dark"] .dark-mode span{
+          background-color: var(--bg-primary);
+          color: var(--text-primary);
+        }
+        */
+      /* </style> */
     </style>
   </head>
-  <body class="transition-colors duration-300">
+  <body class="bg-gray-50">
+    <!-- Removed transition-colors duration-300 -->
     <div class="flex min-h-screen">
       <!-- Sidebar will be inserted here by JS -->
       
@@ -74,7 +78,8 @@
     <script src="/js/dashboard/components/resources.js"></script>
     <script src="/js/dashboard/dashboard.js"></script>
     
-    <!-- Theme Toggle Script -->
+    <!-- Theme Toggle Script - commented out
     <script src="/js/theme.js"></script>
+    -->
   </body>
 </html>

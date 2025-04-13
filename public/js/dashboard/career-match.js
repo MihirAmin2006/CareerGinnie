@@ -275,6 +275,7 @@ function handleLogout(e) {
   }
 }
 
+/* Commenting out the setupDarkMode function
 function setupDarkMode() {
   const darkModeToggle = document.getElementById("theme-toggle-sidebar");
 
@@ -292,6 +293,7 @@ function setupDarkMode() {
     });
   }
 }
+*/
 
 function refreshSidebar() {
   const sidebarContainer = document.querySelector(".flex.min-h-screen");

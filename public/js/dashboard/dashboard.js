@@ -50,7 +50,7 @@ async function initDashboard() {
                 <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
             </div>
             ${renderUserOverview()}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 gap-6">
                 ${renderSkillsAssessment()}
                 <div class="bg-white rounded-lg shadow p-6">
                     <div class="animate-pulse flex space-x-4">
@@ -446,8 +446,8 @@ function renderUserOverview() {
 function renderSkillsAssessment() {
   return `
         <div class="bg-white rounded-lg shadow p-6 h-[200px] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-gray-800">Career Growth Tracker</h2>
+            <div class="mb-4 h-auto">
+                <h2 class="text-xl font-bold text-gray-800 my-8">Career Growth Tracker</h2>
                 <button onclick="addNewAchievement()" class="text-sm bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-md">
                     Add Achievement
                 </button>
@@ -640,7 +640,7 @@ function renderJobMarket() {
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold text-gray-800">Job Market Insights</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="job-market-stats">
+            <div class="grid grid-cols-1 gap-4" id="job-market-stats">
                 <div class="border rounded-lg p-4">
                     <h3 class="font-medium text-gray-800">Average Salary</h3>
                     <p class="text-2xl font-bold text-indigo-600 mt-2" id="avg-salary">Loading...</p>
@@ -766,7 +766,7 @@ async function initDashboard() {
                 <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
             </div>
             ${renderUserOverview()}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 gap-6">
                 ${renderSkillsAssessment()}
                 <div class="bg-white rounded-lg shadow p-6">
                     <div class="animate-pulse flex space-x-4">
@@ -1174,7 +1174,7 @@ async function fetchJobs() {
 const options = {
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': 'a05ae14800msh8c856416dcad393p133d2bjsn36bb40bc820e',
+		// 'x-rapidapi-key': 'a05ae14800msh8c856416dcad393p133d2bjsn36bb40bc820e',
 		'x-rapidapi-host': 'jsearch.p.rapidapi.com'
 	},
 };

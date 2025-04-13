@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,17 +21,37 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="/js/config/firebase-config.js"></script>
     <style>
-      [data-theme="dark"] body{
-        background-color: var(--bg-primary);
+      /* Commenting out theme variables and styles
+      :root {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #a3a3a3;
       }
-  </style>
+
+      [data-theme="dark"] body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      }
+
+      [data-theme="dark"] .bg-white {
+        background-color: var(--bg-secondary);
+      }
+
+      [data-theme="dark"] .text-gray-800 {
+        color: var(--text-primary);
+      }
+
+      [data-theme="dark"] .text-gray-600 {
+        color: var(--text-secondary);
+      }
+      */
+    </style>
   </head>
-  <body class="bg-gray-50 transition-colors duration-300">
-    
+  <body class="bg-gray-50">
+    <!-- Removed transition-colors duration-300 -->
     <div class="flex min-h-screen">
       <!-- Sidebar will be inserted here by JS -->
-      
-      <!-- Main content container -->
       <div class="flex-1 md:ml-64 overflow-x-hidden overflow-y-auto transition-colors duration-300">
         <!-- Content will be dynamically inserted here by resources.js -->
       </div>
@@ -47,7 +67,17 @@
     <!-- Main Script -->
     <script src="/js/dashboard/resources.js"></script>
     
-    <!-- Theme Toggle Script -->
+    <!-- Theme Toggle Script - commented out
     <script src="/js/theme.js"></script>
+    -->
+
+    <script>
+      /* Commenting out theme initialization
+      document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      });
+      */
+    </script>
   </body>
 </html>

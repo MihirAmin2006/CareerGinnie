@@ -1,4 +1,4 @@
-// Career Paths Component
+// wPaths Component
 function renderCareerPaths() {
   return `
     <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-2">

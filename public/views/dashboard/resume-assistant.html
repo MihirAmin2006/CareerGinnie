@@ -21,6 +21,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="/js/config/firebase-config.js"></script>
     <style>
+      /* Commenting out dark mode styles
       [data-theme="dark"] body{
         background-color: var(--bg-primary);
       }
@@ -28,9 +29,11 @@
         color: var(--text-primary);
         background-color: var(--bg-primary);
       }
-  </style>
+      */
+    </style>
   </head>
-  <body class="bg-gray-50 transition-colors duration-300">
+  <body class="bg-gray-50">
+    <!-- Removed transition-colors duration-300 -->
     <div class="flex min-h-screen">
       <!-- Sidebar will be inserted here by JS -->
       
@@ -51,7 +54,8 @@
     <!-- Main Script -->
     <script src="/js/dashboard/resume-assistant.js"></script>
     
-    <!-- Theme Toggle Script -->
+    <!-- Theme Toggle Script - commented out
     <script src="/js/theme.js"></script>
+    -->
   </body>
 </html>
