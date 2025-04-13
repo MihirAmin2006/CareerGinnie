@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Setup dark mode
   setupDarkMode();
+  
+  // Setup resume suggestion functionality
+  setupResumeSuggestions();
 });
 
 function initResumeAssistant() {
@@ -47,13 +50,137 @@ function setupEventListeners() {
   }
   
   // Add event listeners for resume buttons
-  const editResumeBtn = document.querySelector('button:contains("Edit Resume")');
+  const editResumeBtn = document.querySelector('button#edit-resume-btn');
   if (editResumeBtn) {
     editResumeBtn.addEventListener('click', () => {
       // Open resume editor
       console.log('Opening resume editor...');
     });
   }
+  
+  const createResumeBtn = document.querySelector('button#create-resume-btn');
+  if (createResumeBtn) {
+    createResumeBtn.addEventListener('click', () => {
+      // Create new resume
+      console.log('Creating new resume...');
+    });
+  }
+  
+  const analyzeResumeBtn = document.querySelector('button#analyze-resume-btn');
+  if (analyzeResumeBtn) {
+    analyzeResumeBtn.addEventListener('click', () => {
+      // Analyze resume
+      console.log('Analyzing resume...');
+    });
+  }
+  
+  const atsCheckBtn = document.querySelector('button#ats-check-btn');
+  if (atsCheckBtn) {
+    atsCheckBtn.addEventListener('click', () => {
+      // Check ATS compatibility
+      console.log('Checking ATS compatibility...');
+    });
+  }
+}
+
+function setupResumeSuggestions() {
+  // Import the LLAMA service
+  import('/js/services/llamaService.js')
+    .then(module => {
+      const { generateResumeSuggestions, compareResumeWithJob } = module;
+      
+      // Get suggestions button
+      const getSuggestionsBtn = document.getElementById('get-suggestions-btn');
+      if (getSuggestionsBtn) {
+        getSuggestionsBtn.addEventListener('click', async () => {
+          const jobDescription = document.getElementById('job-description').value.trim();
+          
+          if (!jobDescription) {
+            alert('Please enter a job description to get suggestions.');
+            return;
+          }
+          
+          // Show loading state
+          getSuggestionsBtn.disabled = true;
+          getSuggestionsBtn.textContent = 'Getting suggestions...';
+          
+          try {
+            // Get user profile from localStorage or create a default one
+            const userProfile = JSON.parse(localStorage.getItem('userProfile')) || {
+              fullName: 'Your Name',
+              title: 'Your Professional Title',
+              skills: ['Skill 1', 'Skill 2', 'Skill 3'],
+              experience: 'Your experience details',
+              education: 'Your education details',
+              achievements: 'Your achievements'
+            };
+            
+            // Get suggestions from LLAMA API
+            const suggestions = await generateResumeSuggestions(userProfile, jobDescription);
+            
+            // Display suggestions
+            const suggestionsResult = document.getElementById('suggestions-result');
+            const suggestionsContent = document.getElementById('suggestions-content');
+            
+            suggestionsContent.innerHTML = suggestions.replace(/\n/g, '<br>');
+            suggestionsResult.classList.remove('hidden');
+            
+            // Scroll to results
+            suggestionsResult.scrollIntoView({ behavior: 'smooth' });
+          } catch (error) {
+            console.error('Error getting suggestions:', error);
+            alert('An error occurred while getting suggestions. Please try again.');
+          } finally {
+            // Reset button state
+            getSuggestionsBtn.disabled = false;
+            getSuggestionsBtn.textContent = 'Get Suggestions';
+          }
+        });
+      }
+      
+      // Compare resume with job description
+      const compareBtn = document.getElementById('compare-btn');
+      if (compareBtn) {
+        compareBtn.addEventListener('click', async () => {
+          const resumeText = document.getElementById('resume-text').value.trim();
+          const jobDescription = document.getElementById('job-description-match').value.trim();
+          
+          if (!resumeText || !jobDescription) {
+            alert('Please enter both your resume and the job description to compare.');
+            return;
+          }
+          
+          // Show loading state
+          compareBtn.disabled = true;
+          compareBtn.textContent = 'Comparing...';
+          
+          try {
+            // Get comparison from LLAMA API
+            const comparison = await compareResumeWithJob(resumeText, jobDescription);
+            
+            // Display comparison results
+            const comparisonResult = document.getElementById('comparison-result');
+            const comparisonContent = document.getElementById('comparison-content');
+            
+            comparisonContent.innerHTML = comparison.replace(/\n/g, '<br>');
+            comparisonResult.classList.remove('hidden');
+            
+            // Scroll to results
+            comparisonResult.scrollIntoView({ behavior: 'smooth' });
+          } catch (error) {
+            console.error('Error comparing resume with job:', error);
+            alert('An error occurred while comparing. Please try again.');
+          } finally {
+            // Reset button state
+            compareBtn.disabled = false;
+            compareBtn.textContent = 'Compare Match';
+          }
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error importing LLAMA service:', error);
+    });
 }
 
 function setupLogout() {

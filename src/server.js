@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+// Import routes
 const apiRoutes = require('./routes/api');
 const dashboardRoutes = require('./routes/dashboard');
 require('dotenv').config();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // API Routes
+// Use API routes
 app.use('/api', apiRoutes);
 
 // Dashboard routes
