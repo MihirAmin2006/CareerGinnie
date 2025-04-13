@@ -636,10 +636,9 @@ async function deleteAchievement(achievementId) {
 // Update the renderJobMarket function
 function renderJobMarket() {
   return `
-        <div class="bg-white rounded-lg shadow p-6 mt-6">
+        <div class="bg-white rounded-lg shadow p-6 mt-6" style="display: none;">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold text-gray-800">Job Market Insights</h2>
-              
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="job-market-stats">
                 <div class="border rounded-lg p-4">
@@ -1165,13 +1164,21 @@ async function fetchJobs() {
 
   const randomQuery = queries[Math.floor(Math.random() * queries.length)];
   const url = "https://jsearch.p.rapidapi.com/search";
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "13dac02fccmshe90969e3d7b001bp138ac7jsnaa2509384b90",
-      "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-    },
-  };
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       "X-RapidAPI-Key": "13dac02fccmshe90969e3d7b001bp138ac7jsnaa2509384b90",
+//       "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+//     },
+//   };
+const options = {
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': 'a05ae14800msh8c856416dcad393p133d2bjsn36bb40bc820e',
+		'x-rapidapi-host': 'jsearch.p.rapidapi.com'
+	},
+};
+
 
   try {
     const response = await fetch(
@@ -1257,7 +1264,7 @@ async function renderCareerPaths() {
     };
 
     return `
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="bg-white rounded-lg shadow p-6 dark-mode">
         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-6 flex justify-between items-center">
           Career Opportunities
          

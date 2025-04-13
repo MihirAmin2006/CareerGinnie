@@ -95,11 +95,18 @@ async function renderCareerMatches() {
     const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(
       searchQuery
     )}&page=1&num_pages=1&country=us`;
+    // const options = {
+    //   method: "GET",
+    //   headers: {
+    //     "X-RapidAPI-Key": "13dac02fccmshe90969e3d7b001bp138ac7jsnaa2509384b90",
+    //     "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+    //   },
+    // };
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "X-RapidAPI-Key": "13dac02fccmshe90969e3d7b001bp138ac7jsnaa2509384b90",
-        "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+        'x-rapidapi-key': 'a05ae14800msh8c856416dcad393p133d2bjsn36bb40bc820e',
+        'x-rapidapi-host': 'jsearch.p.rapidapi.com'
       },
     };
 

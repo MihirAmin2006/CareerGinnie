@@ -27,6 +27,20 @@
     
     <!-- ECharts for data visualization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      /* .dark-mode {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      } */
+      [data-theme="dark"] .dark-mode h4{
+        color: var(--text-primary);
+      }
+      [data-theme="dark"] .dark-mode span{
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      }
+
+    </style>
   </head>
   <body class="transition-colors duration-300">
     <div class="flex min-h-screen">
@@ -46,8 +60,8 @@
     <script src="/js/dashboard/components/user-overview.js"></script>
     <script src="/js/dashboard/components/skills-assessment.js"></script>
     <script src="/js/dashboard/components/career-paths.js"></script>
-    <script src="/js/dashboard/components/job-market.js"></script>
-    <script src="/js/dashboard/components/notifications.js"></script>
+    <!-- <script src="/js/dashboard/components/job-market.js"></script> -->
+    <!-- <script src="/js/dashboard/components/notifications.js"></script> -->
     <script src="/js/dashboard/components/goal-tracker.js"></script>
     <script src="/js/dashboard/components/salary-trends.js"></script>
 
