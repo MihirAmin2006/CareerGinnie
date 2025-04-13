@@ -18,10 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
               Discover personalized career paths, gain valuable skills insights,
               and connect with opportunities that align with your aspirations.
             </p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-4">
-              <a href="#" class="px-6 py-3 text-base font-medium text-white bg-primary hover:bg-opacity-90 !rounded-button text-center whitespace-nowrap">Get Started Free</a>
-              <a href="#" class="px-6 py-3 text-base font-medium text-primary border border-primary hover:bg-primary/5 !rounded-button text-center whitespace-nowrap">Explore Features</a>
-            </div>
+            <button onclick="openAuthModal('signup')" style="height: 48px; width: 150px;"
+                                    class="mt-8 px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-opacity-90 rounded-button">
+                                    Get Started</button>
           </div>
           <div class="w-full md:w-1/2 md:pl-8">
             <!-- Hero image is part of the background -->
