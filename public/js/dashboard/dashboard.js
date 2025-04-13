@@ -1,7 +1,7 @@
 // Main Dashboard Script
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Initialize components
-    initDashboard();
+    await initDashboard();
     
     // Setup event listeners
     setupEventListeners();
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupDarkMode();
 });
 
-function initDashboard() {
-    // Get container elements
+// In the initDashboard function, after the user authentication
+async function initDashboard() {
     const mainContent = document.querySelector('.flex-1');
     const sidebarContainer = document.querySelector('.flex.min-h-screen');
     
@@ -38,31 +38,49 @@ function initDashboard() {
     if (mainContent) {
         mainContent.classList.add('md:ml-64');
         
-        // Make sure we have a container for our content
         if (!mainContent.querySelector('.container')) {
             mainContent.innerHTML = '<div class="container mx-auto px-4 py-6"></div>';
         }
         
         const contentContainer = mainContent.querySelector('.container');
         
-        let dashboardContent = `
+        // Show loading state first
+        contentContainer.innerHTML = `
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
             </div>
-            
             ${renderUserOverview()}
-            
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 ${renderSkillsAssessment()}
-                ${renderCareerPaths()}
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="animate-pulse flex space-x-4">
+                        <div class="flex-1 space-y-4 py-1">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="space-y-2">
+                                <div class="h-4 bg-gray-200 rounded"></div>
+                                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
             ${renderJobMarket()}
-            
-            <div id="salary-trends-container" class="mt-6"></div>
         `;
-        
-        contentContainer.innerHTML = dashboardContent;
+
+        // Then load the career paths
+        try {
+            // Clear any cached job data
+            sessionStorage.removeItem('jobListings');
+            
+            const careerPathsHTML = await renderCareerPaths();
+            const gridContainer = contentContainer.querySelector('.grid');
+            if (gridContainer) {
+                const careerPathsContainer = gridContainer.children[1];
+                careerPathsContainer.outerHTML = careerPathsHTML;
+            }
+        } catch (error) {
+            console.error('Failed to load career paths:', error);
+        }
     }
 }
 
@@ -187,50 +205,62 @@ function setupDarkMode() {
     }
 }
 
-function fetchUserData() {
-    // In a real app, this would fetch from an API
-    // For now, we'll use mock data
-    const userData = {
-        name: "John Smith",
-        initials: "JS",
-        skillScore: '--',
-        careerMatches: 4,
-        profileCompletion: 85,
-        skills: [
-            { name: "JavaScript", level: 4 },
-            { name: "React", level: 3 },
-            { name: "Node.js", level: 3 },
-            { name: "Python", level: 2 }
-        ],
-        goals: [
-            { name: "Complete 2 Skill Quizzes", progress: 1, total: 2, dueIn: 3 },
-            { name: "Watch 3 Tutorial Videos", progress: 2, total: 3, dueIn: 5 },
-            { name: "Update Resume", progress: 0, total: 1, dueIn: 7 }
-        ],
-        notifications: [
-            { 
-                type: "assessment", 
-                title: "New Python Assessment Available", 
-                description: "Take the new Python Data Science assessment to improve your skill rating.",
-                time: "2 hours ago" 
-            },
-            { 
-                type: "job", 
-                title: "Job Trend Alert", 
-                description: "15% increase in Full Stack Developer jobs.",
-                time: "Yesterday" 
-            },
-            { 
-                type: "course", 
-                title: "New Course Recommendation", 
-                description: "We recommend \"Advanced JavaScript Patterns\" course.",
-                time: "3 days ago" 
-            }
-        ]
-    };
+async function fetchUserData() {
+    // Get the current user from Firebase
+    const currentUser = firebase.auth().currentUser;
     
-    // Update UI with user data
-    updateUserInterface(userData);
+    if (currentUser) {
+        const userData = {
+            name: currentUser.displayName || 'User',
+            initials: getInitials(currentUser.displayName || 'User'),
+            skillScore: '--',
+            careerMatches: 4,
+            profileCompletion: 85,
+            skills: [
+                { name: "JavaScript", level: 4 },
+                { name: "React", level: 3 },
+                { name: "Node.js", level: 3 },
+                { name: "Python", level: 2 }
+            ],
+            goals: [
+                { name: "Complete 2 Skill Quizzes", progress: 1, total: 2, dueIn: 3 },
+                { name: "Watch 3 Tutorial Videos", progress: 2, total: 3, dueIn: 5 },
+                { name: "Update Resume", progress: 0, total: 1, dueIn: 7 }
+            ],
+            notifications: [
+                { 
+                    type: "assessment", 
+                    title: "New Python Assessment Available", 
+                    description: "Take the new Python Data Science assessment to improve your skill rating.",
+                    time: "2 hours ago" 
+                },
+                { 
+                    type: "job", 
+                    title: "Job Trend Alert", 
+                    description: "15% increase in Full Stack Developer jobs.",
+                    time: "Yesterday" 
+                },
+                { 
+                    type: "course", 
+                    title: "New Course Recommendation", 
+                    description: "We recommend \"Advanced JavaScript Patterns\" course.",
+                    time: "3 days ago" 
+                }
+            ]
+        };
+        
+        // Update UI with actual user data
+        updateUserInterface(userData);
+    }
+}
+
+// Helper function to get initials
+function getInitials(name) {
+    return name
+        .split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase();
 }
 
 function updateUserInterface(userData) {
@@ -403,18 +433,128 @@ function renderSkillsAssessment() {
     `;
 }
 
-function renderCareerPaths() {
-    return `
-        <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Career Paths</h2>
-            <div class="space-y-3" id="career-paths-list">
-                <div class="text-center text-gray-500 py-4">Complete an assessment to view matching career paths</div>
-            </div>
-            <button class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded" disabled>
-                Explore Career Paths
-            </button>
+// First, add this new function to fetch LinkedIn posts
+async function fetchLinkedInPosts(company) {
+  const url = `https://linkedin-data-api.p.rapidapi.com/get-company-posts?username=${company}&start=0`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': '13dac02fccmshe90969e3d7b001bp138ac7jsnaa2509384b90',
+      'x-rapidapi-host': 'linkedin-data-api.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text(); // Change to text() first
+    console.log(`Raw response for ${company}:`, result);
+    
+    // Try parsing the response
+    const data = JSON.parse(result);
+    return data.data || [];
+  } catch (error) {
+    console.error(`Error fetching LinkedIn posts for ${company}:`, error);
+    return [];
+  }
+}
+
+// Then update the renderCareerPaths function
+async function renderCareerPaths() {
+  try {
+    console.log("Starting to render career paths...");
+    
+    // Generate random job opportunities
+    const jobTitles = [
+      "Software Engineer", "Frontend Developer", "Backend Developer", 
+      "Full Stack Developer", "DevOps Engineer", "Cloud Architect",
+      "AI Engineer", "Data Scientist", "Mobile Developer",
+      "UI/UX Designer", "Product Manager", "QA Engineer"
+    ];
+
+    const companies = [
+      "Microsoft", "Google", "Amazon", "Meta", "Apple", 
+      "Netflix", "Salesforce", "Adobe", "Twitter"
+    ];
+
+    const descriptions = [
+      "Join our team to build next-generation solutions...",
+      "Looking for talented developers to work on innovative projects...",
+      "Be part of our growing team working on cutting-edge tech...",
+      "Help us shape the future of technology...",
+      "Work with the latest technologies in a dynamic environment...",
+      "Create impactful solutions that reach millions of users..."
+    ];
+
+    // Generate random job data
+    const generateRandomJobs = (count) => {
+      const jobs = [];
+      for (let i = 0; i < count; i++) {
+        jobs.push({
+          title: jobTitles[Math.floor(Math.random() * jobTitles.length)],
+          text: descriptions[Math.floor(Math.random() * descriptions.length)],
+          date: `${Math.floor(Math.random() * 7) + 1} days ago`,
+          likes: Math.floor(Math.random() * 500) + 100
+        });
+      }
+      return jobs;
+    };
+
+    // Generate random company data
+    const randomCompanies = companies
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3)
+      .map(company => ({
+        company,
+        posts: generateRandomJobs(2)
+      }));
+
+    const renderCompanySection = (company) => {
+      return `
+        <div class="mb-6 last:mb-0">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3">${company.company} Opportunities</h3>
+          <div class="space-y-4">
+            ${company.posts.map(post => `
+              <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-start">
+                  <div class="flex-grow">
+                    <h4 class="font-medium text-gray-900">${post.title}</h4>
+                    <p class="text-sm text-gray-600 mt-1">${post.text}</p>
+                    <div class="mt-2 flex items-center text-xs text-gray-500">
+                      <span>${post.date}</span>
+                      <span class="ml-2">• ${post.likes} engagements</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
         </div>
+      `;
+    };
+
+    return `
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Career Opportunities</h2>
+        ${randomCompanies.map(company => renderCompanySection(company)).join('')}
+        <div class="mt-4 text-center">
+          <a href="/careers" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+            View all opportunities →
+          </a>
+        </div>
+      </div>
     `;
+
+  } catch (error) {
+    console.error('Error rendering career paths:', error);
+    return `
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Career Opportunities</h2>
+        <div class="text-center py-6 text-red-500">
+          <p>Error loading opportunities. Please try again later.</p>
+        </div>
+      </div>
+    `;
+  }
 }
 
 function renderJobMarket() {
@@ -476,4 +616,114 @@ function renderGoalTracker() {
             </div>
         </div>
     `;
+}
+
+// Update the fetchJobs function to include randomization
+async function fetchJobs() {
+    const queries = [
+        'software developer',
+        'frontend developer',
+        'backend developer',
+        'full stack developer',
+        'software engineer',
+        'web developer'
+    ];
+    
+    const randomQuery = queries[Math.floor(Math.random() * queries.length)];
+    const url = 'https://jsearch.p.rapidapi.com/search';
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '13dac02fccmshe90969e3d7b001bp138ac7jsnaa2509384b90',
+            'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(`${url}?query=${randomQuery}&page=1&num_pages=1`, options);
+        const result = await response.json();
+        console.log('Jobs API Response:', result);
+        
+        // Shuffle the results if we have any
+        if (result.data && result.data.length > 0) {
+            return result.data.sort(() => Math.random() - 0.5);
+        }
+        return result.data || [];
+    } catch (error) {
+        console.error('Error fetching jobs:', error);
+        return [];
+    }
+}
+
+async function renderCareerPaths() {
+  try {
+    console.log("Starting to render career paths...");
+    
+    // Fetch real job listings
+    const jobs = await fetchJobs();
+
+    const renderJobSection = (job) => {
+      return `
+        <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+          <div class="flex items-start">
+            <div class="flex-grow">
+              <div class="flex items-center gap-2">
+                ${job.employer_logo ? `
+                  <img src="${job.employer_logo}" alt="${job.employer_name}" class="h-8 w-8 object-contain">
+                ` : ''}
+                <h4 class="font-medium text-gray-900">${job.job_title}</h4>
+              </div>
+              <p class="text-sm font-medium text-indigo-600 mt-1">${job.employer_name}</p>
+              <p class="text-sm text-gray-600 mt-1">${job.job_description?.substring(0, 150)}...</p>
+              <div class="mt-2 flex flex-wrap gap-2">
+                ${job.job_employment_type ? `
+                  <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">${job.job_employment_type}</span>
+                ` : ''}
+                ${job.job_city ? `
+                  <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">${job.job_city}, ${job.job_country}</span>
+                ` : ''}
+                ${job.job_salary ? `
+                  <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">${job.job_salary}</span>
+                ` : ''}
+              </div>
+              <div class="mt-3">
+                <a href="${job.job_apply_link}" target="_blank" 
+                   class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                   Apply Now →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    };
+
+    return `
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Career Opportunities</h2>
+        <div class="space-y-4">
+          ${jobs.length > 0 
+            ? jobs.map(job => renderJobSection(job)).join('')
+            : '<div class="text-center text-gray-500 py-4">Loading job opportunities...</div>'
+          }
+        </div>
+        <div class="mt-4 text-center">
+          <a href="/careers" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+            View all opportunities →
+          </a>
+        </div>
+      </div>
+    `;
+
+  } catch (error) {
+    console.error('Error rendering career paths:', error);
+    return `
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Career Opportunities</h2>
+        <div class="text-center py-6 text-red-500">
+          <p>Error loading opportunities. Please try again later.</p>
+        </div>
+      </div>
+    `;
+  }
 }
