@@ -1211,7 +1211,7 @@ const options = {
 	method: 'GET',
 	headers: {
 		// 'x-rapidapi-key': 'a05ae14800msh8c856416dcad393p133d2bjsn36bb40bc820e',
-		// 'x-rapidapi-key': 'f2d02cc479mshb49bf6106fabaddp19fb76jsn8333da616de2',
+		'x-rapidapi-key': 'f2d02cc479mshb49bf6106fabaddp19fb76jsn8333da616de2',
 		'x-rapidapi-host': 'jsearch.p.rapidapi.com'
 	},
 };
