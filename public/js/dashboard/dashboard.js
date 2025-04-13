@@ -461,51 +461,87 @@ function renderSkillsAssessment() {
             <div id="achievement-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
                 <div class="bg-white rounded-lg p-6 w-full max-w-md">
                     <h3 class="text-lg font-bold mb-4">Add New Achievement</h3>
-                    <form id="achievement-form" onsubmit="saveAchievement(event)" class="space-y-6">
-                        <div class="space-y-5">
-                            <div>
-                                <label class="block text-lg font-semibold text-gray-800 mb-2">Achievement Title</label>
-                                <input type="text" id="achievement-title" required
-                                    class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 
-                                    focus:ring-2 focus:ring-indigo-500 focus:border-transparent
-                                    placeholder-gray-400 transition duration-150 ease-in-out
-                                    hover:border-indigo-300"
-                                    placeholder="Enter achievement title">
-                            </div>
-                            <div>
-                                <label class="block text-lg font-semibold text-gray-800 mb-2">Description</label>
-                                <textarea id="achievement-description" rows="4" required
-                                    class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300
-                                    focus:ring-2 focus:ring-indigo-500 focus:border-transparent
-                                    placeholder-gray-400 transition duration-150 ease-in-out
-                                    hover:border-indigo-300 resize-none"
-                                    placeholder="Describe your achievement"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-lg font-semibold text-gray-800 mb-2">Achievement Date</label>
-                                <input type="date" id="achievement-date" required
-                                    class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300
-                                    focus:ring-2 focus:ring-indigo-500 focus:border-transparent
-                                    transition duration-150 ease-in-out
-                                    hover:border-indigo-300">
-                            </div>
-                        </div>
-                        <div class="mt-6 flex justify-end space-x-4">
-                            <button type="button" onclick="closeAchievementModal()" 
-                                class="px-6 py-3 text-base font-medium text-gray-700 bg-gray-100 
-                                hover:bg-gray-200 rounded-lg transition duration-150 ease-in-out
-                                focus:outline-none focus:ring-2 focus:ring-gray-400">
-                                Cancel
-                            </button>
-                            <button type="submit" 
-                                class="px-6 py-3 text-base font-medium text-white bg-indigo-600 
-                                hover:bg-indigo-700 rounded-lg transition duration-150 ease-in-out
-                                focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-md
-                                hover:shadow-lg">
-                                Save Achievement
-                            </button>
-                        </div>
-                    </form>
+                    <form id="achievement-form" onsubmit="saveAchievement(event)" class="space-y-8 max-w-lg mx-auto bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg">
+    <div class="space-y-6">
+        <div class="form-group relative transition-all duration-300 hover:transform hover:scale-[1.01]">
+            <label class="block text-lg font-semibold text-gray-800 mb-2 tracking-wide">
+                Achievement Title
+                <span class="text-red-500 ml-1">*</span>
+            </label>
+            <input type="text" id="achievement-title" required
+                class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200 
+                bg-gray-50 transition-all duration-200
+                focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+                hover:border-indigo-300 hover:bg-white
+                text-gray-700 placeholder-gray-400"
+                placeholder="Enter a meaningful title">
+        </div>
+
+        <div class="form-group relative transition-all duration-300 hover:transform hover:scale-[1.01]">
+            <label class="block text-lg font-semibold text-gray-800 mb-2 tracking-wide">
+                Description
+                <span class="text-red-500 ml-1">*</span>
+            </label>
+            <textarea id="achievement-description" rows="4" required
+                class="form-textarea w-full px-4 py-3 rounded-lg border-2 border-gray-200
+                bg-gray-50 transition-all duration-200
+                focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+                hover:border-indigo-300 hover:bg-white
+                text-gray-700 placeholder-gray-400 resize-none"
+                placeholder="Describe your achievement in detail"></textarea>
+            <div class="absolute right-2 bottom-2 text-xs text-gray-400">
+                <span id="char-count">0</span>/500
+            </div>
+        </div>
+
+        <div class="form-group relative transition-all duration-300 hover:transform hover:scale-[1.01]">
+            <label class="block text-lg font-semibold text-gray-800 mb-2 tracking-wide">
+                Achievement Date
+                <span class="text-red-500 ml-1">*</span>
+            </label>
+            <div class="relative">
+                <input type="date" id="achievement-date" required
+                    class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200
+                    bg-gray-50 transition-all duration-200
+                    focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+                    hover:border-indigo-300 hover:bg-white
+                    text-gray-700">
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-6 border-t border-gray-200">
+        <div class="flex justify-end space-x-4">
+            <button type="button" onclick="closeAchievementModal()"
+                class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-100 
+                rounded-lg transition-all duration-200 transform hover:scale-105
+                hover:bg-gray-200 hover:shadow-md
+                focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                Cancel
+            </button>
+            <button type="submit"
+                class="px-6 py-3 text-sm font-semibold text-white bg-indigo-600 
+                rounded-lg transition-all duration-200 transform hover:scale-105
+                hover:bg-indigo-700 hover:shadow-lg
+                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M5 13l4 4L19 7" />
+                    </svg>
+                    Save Achievement
+                </span>
+            </button>
+        </div>
+    </div>
+</form>
                 </div>
             </div>
         </div>
